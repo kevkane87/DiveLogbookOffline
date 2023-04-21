@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DiveLogbookOffline</string>
+    <string name="bottom_time_mins">Bottom time (mins)</string>
+    <string name="dive_name">Dive name</string>
+    <string name="date">Date</string>
+    <string name="max_depth_m">Max depth (m)</string>
+    <string name="save">Save</string>
+</resources>
