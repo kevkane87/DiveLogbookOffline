@@ -5,4 +5,9 @@
     <string name="date">Date</string>
     <string name="max_depth_m">Max depth (m)</string>
     <string name="save">Save</string>
+
+    <string name="add_dive">Add Dive</string>
+    <string name="dive_site">Dive site</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

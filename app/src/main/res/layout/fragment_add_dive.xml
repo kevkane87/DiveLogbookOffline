@@ -31,6 +31,7 @@
                 android:id="@+id/date_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
                 android:ems="10"
                 android:inputType="date" />
         </TableRow>
@@ -49,6 +50,26 @@
                 android:id="@+id/dive_name_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/label_dive_site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dive_site" />
+
+            <EditText
+                android:id="@+id/dive_site_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
                 android:ems="10"
                 android:inputType="textPersonName" />
         </TableRow>
@@ -67,6 +88,7 @@
                 android:id="@+id/bottom_time_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
                 android:ems="10"
                 android:inputType="number" />
         </TableRow>
@@ -85,6 +107,7 @@
                 android:id="@+id/max_depth_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
                 android:ems="10"
                 android:inputType="number" />
         </TableRow>

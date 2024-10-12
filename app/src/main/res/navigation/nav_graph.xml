@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listDivesFragment">
+
+    <fragment
+        android:id="@+id/addDiveFragment"
+        android:name="com.example.divelogbookoffline.add_dive.AddDiveFragment"
+        android:label="AddDiveFragment" >
+        <action
+            android:id="@+id/action_addDiveFragment_to_listDivesFragment"
+            app:destination="@id/listDivesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listDivesFragment"
+        android:name="com.example.divelogbookoffline.list_dives.ListDivesFragment"
+        android:label="ListDivesFragment" >
+        <action
+            android:id="@+id/action_listDivesFragment_to_addDiveFragment"
+            app:destination="@id/addDiveFragment" />
+    </fragment>
+</navigation>
