@@ -11,6 +11,6 @@ data class Dive(
         @ColumnInfo(name = "diveTitle") val diveTitle: String?,
         @ColumnInfo(name = "diveSite") val diveSite: String?,
         @ColumnInfo(name = "bottomTime") val bottomTime: Int?,
-        @ColumnInfo(name = "maxDepth") val maxDepth: Int?,
+        @ColumnInfo(name = "maxDepth") val maxDepth: Double?,
     )
 
