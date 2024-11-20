@@ -45,6 +45,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation libs.litert.api
+    implementation libs.litert.metadata
+    implementation libs.runtime.livedata
+    implementation libs.storage
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
@@ -87,6 +91,14 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.2")
     // Optional - Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+
+    /*implementation libs.pytorch.android // Replace with the latest version
+    implementation libs.pytorch.android.torchvision // Optional for image processing*/
+
+    //implementation 'org.pytorch:pytorch_android_lite:1.12.2'
+    //implementation 'org.pytorch:pytorch_android_torchvision_lite:1.12.2'
+
+    implementation libs.opencv
 
 
 }

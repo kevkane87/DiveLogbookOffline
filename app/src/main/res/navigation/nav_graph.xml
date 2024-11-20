@@ -19,5 +19,16 @@
         <action
             android:id="@+id/action_listDivesFragment_to_addDiveFragment"
             app:destination="@id/addDiveFragment" />
+        <action
+            android:id="@+id/action_listDivesFragment_to_colourCorrectFragment"
+            app:destination="@id/colourCorrectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/colourCorrectFragment"
+        android:name="com.example.divelogbookoffline.colour_correct.ColourCorrectFragment"
+        android:label="ColourCorrectFragment" >
+        <action
+            android:id="@+id/action_colourCorrectFragment_to_listDivesFragment"
+            app:destination="@id/listDivesFragment" />
     </fragment>
 </navigation>

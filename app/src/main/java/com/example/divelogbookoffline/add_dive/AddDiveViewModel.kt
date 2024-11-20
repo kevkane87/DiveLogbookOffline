@@ -8,7 +8,7 @@ import com.example.divelogbookoffline.DiveDatabase.Companion.getDatabase
 import com.example.divelogbookoffline.Repository
 import kotlinx.coroutines.launch
 
-class AddDiveViewModel(application: Application,): ViewModel() {
+class AddDiveViewModel(application: Application): ViewModel() {
 
     private val repository = Repository(getDatabase(application))
 

@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -14,11 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,7 +63,6 @@ class ListDivesFragment: Fragment() {
     @Preview(showBackground = true)
     @Composable
     fun DiveListPreview() {
-        val sampleDives = listOf("Dive 1", "Dive 2", "Dive 3", "Dive 4", "Dive 5")
         ItemListScreen()
     }
 
@@ -83,13 +88,32 @@ class ListDivesFragment: Fragment() {
         Card(modifier = Modifier.clickable { onClick(item) }
             .fillMaxWidth()
             .padding(8.dp, 8.dp, 8.dp)) {
-           Text(
-           text = item.diveTitle?:"",
-               fontSize = 16.sp,
-           modifier = Modifier
-               .padding(16.dp, 4.dp)
 
-           )
+
+            Row(
+                modifier = Modifier.padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+
+            ) {
+
+                Text(
+                    text = item.diveTitle?:"",
+                    fontSize = 16.sp,
+                    modifier = Modifier
+                        .padding(16.dp, 4.dp)
+
+                )
+
+                Text(
+                    text = item.date?:"",
+                    textAlign = TextAlign.End,
+                    fontSize = 12.sp,
+                    modifier = Modifier
+                        .padding(16.dp, 4.dp)
+                )
+
+            }
 
            Text(
                text = item.diveSite?:"",
@@ -98,12 +122,7 @@ class ListDivesFragment: Fragment() {
                    .padding(16.dp, 4.dp)
            )
 
-           Text(
-               text = item.date?:"",
-               fontSize = 12.sp,
-               modifier = Modifier
-                   .padding(16.dp, 4.dp)
-           )
+
 
             Text(
                 text = item.bottomTime.toString(),
@@ -126,16 +145,6 @@ class ListDivesFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
 
-        /*val adapter = ListDivesAdapter()
-        binding.listDivesRecyclerview.adapter = adapter
-
-        // Collect from the Flow in the ViewModel, and submit it to the adapter
-        lifecycleScope.launch {
-            viewModel.allDives().collectLatest {
-                adapter.submitList(it)
-            }
-        }*/
-
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here
@@ -146,7 +155,7 @@ class ListDivesFragment: Fragment() {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.action_add -> {
-                        findNavController().navigate(R.id.action_listDivesFragment_to_addDiveFragment)
+                        findNavController().navigate(R.id.action_listDivesFragment_to_colourCorrectFragment)
                         true
                     }
                     else -> false

@@ -1,5 +1,19 @@
 [versions]
 kotlin = "2.0.21"
+litertApi = "1.0.1"
+litertMetadata = "1.0.1"
+opencv = "4.9.0"
+pytorch_android = "1.13.0"
+runtimeLivedata = "1.7.5"
+storage = "1.5.0"
+[libraries]
+litert-api = { group = "com.google.ai.edge.litert", name = "litert-api", version.ref = "litertApi" }
+litert-metadata = { group = "com.google.ai.edge.litert", name = "litert-metadata", version.ref = "litertMetadata" }
+opencv = { module = "org.opencv:opencv", version.ref = "opencv" }
+pytorch_android = { module = "org.pytorch:pytorch_android", version.ref = "pytorch_android" }
+pytorch_android_torchvision = { module = "org.pytorch:pytorch_android_torchvision", version.ref = "pytorch_android" }
+runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
+storage = { group = "androidx.test.services", name = "storage", version.ref = "storage" }
 
 [plugins]
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

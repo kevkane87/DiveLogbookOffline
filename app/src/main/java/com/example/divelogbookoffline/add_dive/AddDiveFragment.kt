@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
@@ -53,7 +55,6 @@ class AddDiveFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 UserInputScreen { diveTitle, diveSite, date, bottomTime, maxDepth ->
-                    // Handle submission here (e.g., validate inputs, call a ViewModel, etc.)
                     Log.d("UserInput", "diveTitle: $diveTitle, diveSite: $diveSite, date: $date")
                     viewModel.saveDive(Dive(
                         0,
@@ -68,18 +69,20 @@ class AddDiveFragment : Fragment() {
 
     @Composable
     fun UserInputScreen(onSave: (String, String, String, String, String) -> Unit) {
-        // State variables to hold input values
+
         var diveName by remember { mutableStateOf("") }
         var diveSite by remember { mutableStateOf("") }
         var date by remember { mutableStateOf("") }
         var bottomTime by remember { mutableStateOf("") }
         var maxDepth by remember { mutableStateOf("") }
 
-        // Layout
+        val scrollState = rememberScrollState()
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -134,7 +137,7 @@ class AddDiveFragment : Fragment() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Submit Button
+
             Button(
                 onClick = {
                     onSave(diveName, diveSite, date, bottomTime, maxDepth )
