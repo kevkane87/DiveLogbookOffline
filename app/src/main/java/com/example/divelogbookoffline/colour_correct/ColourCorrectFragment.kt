@@ -51,6 +51,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+import androidx.compose.foundation.layout.aspectRatio
+
+
 
 class ColourCorrectFragment : Fragment() {
 
@@ -74,12 +77,17 @@ class ColourCorrectFragment : Fragment() {
 fun ImagePickerScreen(viewModel: ColourCorrectViewModel) {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
+    var processedBitmap by remember { mutableStateOf<Bitmap?>(null) } // For processed image
     var isProcessing by remember { mutableStateOf(false) }  // To track the processing state
 
     // Launch image picker
     val context = LocalContext.current
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            // Reset previous images before loading new ones
+            bitmap = null
+            processedBitmap = null
+            isProcessing = false // Reset processing state
             imageUri = uri
         }
 
@@ -95,46 +103,56 @@ fun ImagePickerScreen(viewModel: ColourCorrectViewModel) {
     }
 
     // Observe the processed bitmap and stop the loading when done
-    val processedBitmap by viewModel.outputBitmap.observeAsState()
-    isProcessing = processedBitmap == null // If processedBitmap is null, show loading
+    val resultBitmap by viewModel.outputBitmap.observeAsState()
+    LaunchedEffect(resultBitmap) {
+        resultBitmap?.let {
+            processedBitmap = it
+            isProcessing = false // Stop loading when result is available
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center, // Center the column content vertically
+                .padding(0.dp, 16.dp, ),
+            verticalArrangement = Arrangement.Top, // Align content at the top
             horizontalAlignment = Alignment.CenterHorizontally // Center horizontally
         ) {
-            // Centered Button
-            Button(onClick = { launcher.launch("image/*") }) {
+            // Button to select image
+            Button(
+                onClick = { launcher.launch("image/*") }
+            ) {
                 Text(text = "Pick Image")
             }
 
-            Spacer(modifier = Modifier.height(16.dp)) // Add some spacing between button and images
+            Spacer(modifier = Modifier.height(16.dp)) // Space between button and images
 
             // Show a loading indicator when processing
             if (isProcessing) {
                 CircularProgressIndicator(modifier = Modifier.size(64.dp))
             } else {
-                // Display the selected image
+                // Show the selected image scaled to width
                 bitmap?.let {
+                    val aspectRatio = it.width.toFloat() / it.height.toFloat()
                     Image(
                         bitmap = it.asImageBitmap(),
                         contentDescription = "Selected Image",
                         modifier = Modifier
-                            .fillMaxWidth()  // Fill width, or adjust as necessary
-                            .clickable { launcher.launch("image/*") }
+                            .fillMaxWidth()
+                            .aspectRatio(aspectRatio) // Maintain aspect ratio
                     )
                 }
 
-                // Display the processed image
+                // Show the processed image once available, scaled to width
                 processedBitmap?.let {
+                    val aspectRatio = it.width.toFloat() / it.height.toFloat()
                     Image(
                         bitmap = it.asImageBitmap(),
                         contentDescription = "Processed Image",
                         modifier = Modifier
-                            .fillMaxWidth()  // Adjust to fill width or any other specific size
+                            .fillMaxWidth()
+                            .aspectRatio(aspectRatio) // Maintain aspect ratio
                     )
                 }
             }
